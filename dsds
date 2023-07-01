@@ -1,0 +1,16 @@
+import telebot
+from telebot import types
+token='6277036977:AAH7FNm-02yIjN1eVp0fgTTMym-DQBfXFmM'
+obrobot=open("admins.txt", "r")
+admins = obrobot.read()
+bot=telebot.TeleBot(token)
+@bot.message_handler(commands=['start'])
+def start_message(message):
+    if str(message.chat.id) in admins:        
+      bot.send_message(message.chat.id, f"💭 Здравствуйте, {message.from_user.username}!\nХотите сделать набор на отзывы?")
+      markup = types.ReplyKeyboardMarkup(resize_keyboard=True)        btn1 = types.KeyboardButton("Да")
+      btn2 = types.KeyboardButton("Нет")        markup.add(btn1, btn2)
+      if message.text == "Да":            bot.send_message(message.chat.id, "
+    else:       
+      bot.send_message(message.chat.id, "Доступ не обнаружен, для покупки, просим вас, написать - @Osiblion")
+bot.infinity_polling()
